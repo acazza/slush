@@ -1,0 +1,136 @@
+.wpcf7-form,
+.soundlush-form-group{
+  display: block;
+  position: relative;
+  margin-bottom: 1.5em;
+  label{
+    font-family: $font_body;
+    font-weight: 700;
+  }
+  input[type=submit].search {
+    display: none;
+  }
+
+  .icon-soundlush.icon-search{
+    width: 20px;
+    height: 20px;
+    fill: $color_primary;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    right:0
+  }
+}
+
+.wpcf7-form-control,
+.soundlush-input-field{
+  display: block;
+  position: relative;
+  margin: 0.5em 0;
+  padding: 0.5em;
+  width: 100%;
+  font-family: $font_body;
+  font-size: 1em;
+  font-weight: 400;
+  &::-webkit-input-placeholder{
+    color: $color_base_light;
+    font-weight: 300;
+  }
+  &:-ms-input-placeholder{
+    color: $color_base_light;
+    font-weight: 300;
+  }
+  &::-ms-input-placeholder{
+    color: $color_base_light;
+    font-weight: 300;
+  }
+  &::placeholder{
+    color: $color_base_light;
+    font-weight: 300;
+  }
+}
+
+
+input,
+textarea {
+  //border-width: 0px;
+  &:focus{
+    outline-color: $color_primary;
+    outline-width: 3px;
+  }
+}
+
+textarea {
+  resize: vertical;
+}
+
+.has-error {
+  input {
+    border-color: red;
+  }
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-info {
+  color: gray;
+}
+
+.text-success {
+  color: green;
+}
+
+.form-control-msg {
+  display: none;
+  padding: 0 0.5em;
+}
+
+.has-error {
+  .form-control-msg {
+    display: block;
+  }
+}
+
+.js-show-form-feedback {
+  display: block;
+  small {
+    display: block;
+  }
+}
+
+.js-remove-quiz-result{
+  display: none;
+}
+
+
+.fade-in-2s{
+  opacity: 1;
+  -webkit-animation-name: fadeInOpacity;
+          animation-name: fadeInOpacity;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-timing-function: ease-in;
+          animation-timing-function: ease-in;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+}
+
+@-webkit-keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}

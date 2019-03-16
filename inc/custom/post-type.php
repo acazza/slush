@@ -1,7 +1,6 @@
 <?php
 /**
  * Slush Custom Post Types Class
- *
  * @link http://codex.wordpress.org/Function_Reference/register_post_type
  * @package com.soundlush.slush.v1
  */

@@ -12,12 +12,12 @@
 
   <header class="entry-header">
     <?php
-      $link = soundlush_grab_url();
+      $link = wpsl_grab_url();
       the_title( '<h2 class="entry-title"><a href="' . $link . '" target="_blank">', '<div class="link-icon">' .  soundlush_get_svg( array( 'icon' => esc_attr( 'link' ) ) )  .  '</div></a></h2>')
     ?>
 
     <div class="entry-meta">
-      <?php echo soundlush_posted_meta(); ?>
+      <?php echo wpsl_get_post_meta(); ?>
     </div>
 
   </header>

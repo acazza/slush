@@ -13,15 +13,15 @@
   <header class="entry-header">
 
     <?php
-    if( soundlush_get_attachment() ):
-      $attachments = soundlush_get_attachment(5);
+    if( wpsl_get_attachment() ):
+      $attachments = wpsl_get_attachment(5);
     endif
     ?>
 
     <?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>') ?>
 
     <div class="entry-meta">
-      <?php echo soundlush_posted_meta(); ?>
+      <?php echo wpsl_get_post_meta(); ?>
     </div>
   </header>
 
@@ -35,7 +35,7 @@
   </div> <!-- .entry-content -->
 
   <footer class="entry-footer">
-    <?php echo soundlush_posted_footer(); ?>
+    <?php echo wpsl_get_post_footer(); ?>
     <hr>
   </footer>
 

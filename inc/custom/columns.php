@@ -1,7 +1,6 @@
 <?php
 /**
  * Slush Edit Post Columns Class
- *
  * @link https://codex.wordpress.org/Plugin_API/Action_Reference/manage_posts_custom_column
  * @package com.soundlush.slush.v1
  */

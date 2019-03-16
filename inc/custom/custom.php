@@ -21,9 +21,14 @@ add_action( 'post_edit_form_tag', 'wpsl_update_edit_form' );
 
 
 
+/**
+ * Get Post Meta
+ * return html markup with tags and comment number for the post
+ * @return string  |  html markup
+ * @version 1.0
+ */
 
-
-function soundlush_posted_meta()
+function wpsl_get_post_meta()
 {
     $posted_on  = get_the_date();
     $posted_in  = '';
@@ -54,8 +59,14 @@ function soundlush_posted_meta()
 
 
 
+/**
+ * Get Post Footer
+ * return html markup with tags and comment number for the post
+ * @return string  |  html markup
+ * @version 1.0
+ */
 
-function soundlush_posted_footer()
+function wpsl_get_post_footer()
 {
     $tags     = get_the_tag_list('<div class="tags-list">', ' ', '</div>');
     $tag_icon = '<i class="fas fa-tag fa-lg"></i>';
@@ -67,22 +78,18 @@ function soundlush_posted_footer()
     {
         if( $comments_num == 0 )
         {
-            $comments = __( 'No Comments' );
-        }
-        elseif( $comments_num > 1 )
-        {
-            $comments = $comments_num . ' ' . __( 'Comments' );
+            $comments = __( 'No Comments', 'slush' );
         }
         else
         {
-            $comments = __( '1 Comment' );
+            $comments = sprintf( _n( '%s Comment', '%s Comments', $comments_num, 'slush' ), $comments_num );
         }
 
         $comments = '<a href="' . get_comments_link() . '">' . $comments . $comment_icon . '</a>';
     }
     else
     {
-        $comments = __( 'Comments are closed' );
+        $comments = __( 'Comments are closed', 'slush' );
     };
 
     return '<div class="post-footer-container"><div class="tag-container">' . $tag_icon . $tags . '</div><div class="comment-container">' . $comments . '</div></div>';
@@ -90,10 +97,16 @@ function soundlush_posted_footer()
 
 
 
+/**
+ * Get Attachment
+ * get image attachments in the content
+ * @param int      |  $num     |  The number of attachments to retrieve
+ * @return string  |  $output  |  The html markup for the list
+ * @usedby Standard, Image, Gallery, Aside & Video Post Format
+ * @version 1.0
+ */
 
-//Standard & Image Post Format
-
-function soundlush_get_attachment( $num = 1 )
+function wpsl_get_attachment( $num = 1 )
 {
     $output = '';
 
@@ -129,10 +142,16 @@ function soundlush_get_attachment( $num = 1 )
 
 
 
+/**
+ * Get Embedded Media
+ * get any audio or video embedded in the content
+ * @param array    |  $type    |  An array with the type(s) of embedded media to retrieve
+ * @return string  |  $output  |  The html markup for the list
+ * @usedby Audio & Video Post Format
+ * @version 1.0
+ */
 
-//Audio & Video Post Format
-
-function soundlush_get_embedded_media( $type = array() )
+function wpsl_get_embedded_media( $type = array() )
 {
     $content = do_shortcode( apply_filters( 'the_content', get_the_content() ) );
     $embed   = get_media_embedded_in_content( $content, $type );
@@ -151,10 +170,15 @@ function soundlush_get_embedded_media( $type = array() )
 
 
 
+/**
+ * Grab URL
+ * grab any URL in the content
+ * @return string|false  |   The url or false
+ * @usedby Link Post Format
+ * @version 1.0
+ */
 
-//Link Post Format
-
-function soundlush_grab_url()
+function wpsl_grab_url()
 {
     if( !preg_match( '/<a\s[^>]*?href=[\'"](.+?)[\'"]/i', get_the_content(), $links ) )
     {
@@ -168,18 +192,27 @@ function soundlush_grab_url()
 
 
 
-//Post Navigation Section
+/**
+ * Get Post Navigation Section
+ * get post navigation section template
+ * @deprecated
+ * @version 1.0
+ */
 
-function soundlush_get_post_navigation()
+function wpsl_get_post_navigation()
 {
     require( get_template_directory() . '/inc/templates/soundlush-post-nav.php' );
 }
 
 
 
-//Comment Navigation Section
+/**
+ * Get Comment Navigation Section
+ * get comment navigation section template
+ * @version 1.0
+ */
 
-function soundlush_get_comment_navigation()
+function wpsl_get_comment_navigation()
 {
     if( get_comment_pages_count() > 1 && get_option( 'page_comments' ) )
     {
@@ -189,9 +222,15 @@ function soundlush_get_comment_navigation()
 
 
 
-//Share Post Section
+/**
+ * Content Filter Share Post
+ * append social media sharing icons at the bottom of post content
+ * @param array   |  $content  | The post content
+ * @return array  |  $content  | The post content with appended sharing icons
+ * @version 1.0
+ */
 
-function soundlush_share_post( $content )
+function wpsl_share_post( $content )
 {
     if( is_singular( 'post' ) )
     {
@@ -214,16 +253,21 @@ function soundlush_share_post( $content )
         return $content;
     }
 }
-add_filter( 'the_content', 'soundlush_share_post' );
+add_filter( 'the_content', 'wpsl_share_post' );
 
 
 
+/**
+ * Content Filter Related Posts
+ * append list of related posts at the bottom of post content
+ * @param array   |  $content  | The post content
+ * @return array  |  $content  | The post content with appended related posts list
+ * @version 1.0
+ */
 
-//Related Posts Section
-
-function soundlush_related_posts( $content )
+function wpsl_related_posts( $content )
 {
-    if( is_single() )
+    if( is_singular( 'post' ) )
     {
         global $post;
         $original_post = $post;
@@ -255,7 +299,7 @@ function soundlush_related_posts( $content )
 
                     $content .= '<div class="related-thumbnail">';
                     $content .= '<a href="' . get_the_permalink() . '">';
-                    $content .= '<img src="' . soundlush_get_attachment() . '" height="100" width="150" >';
+                    $content .= '<img src="' . wpsl_get_attachment() . '" height="100" width="150" >';
                     $content .= get_the_title();
                     $content .= '</a></div>';
                 }
@@ -273,18 +317,22 @@ function soundlush_related_posts( $content )
         return $content;
     }
 }
-add_filter( 'the_content', 'soundlush_related_posts' );
+add_filter( 'the_content', 'wpsl_related_posts' );
 
 
 
+/**
+ * Get Latest Posts
+ * retrieve a list of the lastest published posts
+ * @param int      |  $num     | The number of posts in the list
+ * @return string  |  $output  | The html markup for the list
+ * @version 1.0
+ */
 
-//Latest Posts Section
-
-function soundlush_get_latest_posts( $number_posts = 1 )
+function wpsl_get_latest_posts( $num = 1 )
 {
-
     $lastest_posts = wp_get_recent_posts( array(
-        'numberposts' => $number_posts,
+        'numberposts' => $num,
         'orderby'     => 'post_date',
         'order'       => 'DESC',
         'post_type'   => 'post'
@@ -307,9 +355,15 @@ function soundlush_get_latest_posts( $number_posts = 1 )
 
 
 
-//Featured Posts Section
+/**
+ * Get Featured Posts
+ * retrieve a list of the featured posts (excluding latest post)
+ * @param int      |  $num     | The number of posts in the list
+ * @return string  |  $output  | The html markup for the list
+ * @version 1.0
+ */
 
-function soundlush_get_featured_posts( $num_posts = 3 )
+function wpsl_get_featured_posts( $num = 3 )
 {
     //Get latest post
     $lastest= wp_get_recent_posts( array(
@@ -322,7 +376,7 @@ function soundlush_get_featured_posts( $num_posts = 3 )
     $sticky = get_option( 'sticky_posts' );
 
     $args = array(
-        'posts_per_page'      => $num_posts,
+        'posts_per_page'      => $num,
   	    'post__in'            => $sticky,
         'post__not_in'        => $lastest, //Exclude latest post, if sticky, already in display
         'orderby'             => 'post_date',
@@ -344,7 +398,7 @@ function soundlush_get_featured_posts( $num_posts = 3 )
 
             $output .= '<div class="related-thumbnail">';
             $output .= '<a href="' . get_the_permalink() . '">';
-            $output .= '<img src="' . soundlush_get_attachment() . '" height="100" width="150" >';
+            $output .= '<img src="' . wpsl_get_attachment() . '" height="100" width="150" >';
             $output .= get_the_title();
             $output .= '</a></div>';
         }
@@ -358,9 +412,15 @@ function soundlush_get_featured_posts( $num_posts = 3 )
 
 
 
+/**
+ * Check purchase
+ * verify if user already bought a course (Course Page)
+ * @param int    |  $product    | The product id
+ * @return bool  |  true|false  | True if user has bought the product
+ * @version 1.0
+ */
 
-//Verify if user already bought a course (Course Page)
-function soundlush_check_purchase( $product )
+function wpsl_check_purchase( $product )
 {
     $current_user = wp_get_current_user();
 
@@ -378,6 +438,12 @@ function soundlush_check_purchase( $product )
 
 
 
+/**
+ * Is WooCommerce Activated
+ * check if WooCommerce Plugin is Active
+ * @return bool  |  true|false
+ * @version 1.0
+ */
 
 if( !function_exists( 'is_woocommerce_activated' ) )
 {

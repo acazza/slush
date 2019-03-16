@@ -20,8 +20,8 @@
   </header>
 
   <div class="entry-content">
-    <?php if( soundlush_get_attachment() ): ?>
-      <div class="standard-featured background-image" style="background-image: url( <?php echo soundlush_get_attachment(); ?> );"></div>
+    <?php if( wpsl_get_attachment() ): ?>
+      <div class="standard-featured background-image" style="background-image: url( <?php echo wpsl_get_attachment(); ?> );"></div>
 
     <?php endif ?>
     <?php the_content(); ?>

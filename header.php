@@ -47,7 +47,7 @@
                 'theme_location' => 'primary',
                 'container'      => false,
                 'menu_class'     => 'nav navbar',
-                'walker'         => new SlushWalkerNavMegaMenu()
+                //'walker'         => new SlushWalkerNavMegaMenu()
               ) );
             ?>
           </nav>

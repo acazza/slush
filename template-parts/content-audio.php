@@ -13,13 +13,13 @@
   <header class="entry-header">
     <?php the_title( '<h2 class="entry-title"><a href="' . esc_url( get_permalink() ) . '" rel="bookmark">', '</a></h2>') ?>
 
-    <div class="entry-meta"><?php echo soundlush_posted_meta(); ?></div>
+    <div class="entry-meta"><?php echo wpsl_get_post_meta(); ?></div>
   </header>
 
-  <div class="entry-content"><?php echo soundlush_get_embedded_media( array( 'audio', 'iframe' ) ); ?></div>
+  <div class="entry-content"><?php echo wpsl_get_embedded_media( array( 'audio', 'iframe' ) ); ?></div>
 
   <footer class="entry-footer">
-    <?php echo soundlush_posted_footer(); ?>
+    <?php echo wpsl_get_post_footer(); ?>
     <hr>
   </footer>
 

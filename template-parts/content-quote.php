@@ -18,7 +18,7 @@
   </header>
 
   <footer class="entry-footer">
-    <?php echo soundlush_posted_footer(); ?>
+    <?php echo wpsl_get_post_footer(); ?>
     <hr>
   </footer>
 

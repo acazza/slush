@@ -35,9 +35,9 @@ endif;
           '<span>' . get_the_title() . '</span>'
         );
       ?>
-    <h4>
+    </h4>
 
-    <?php soundlush_get_comment_navigation(); ?>
+    <?php wpsl_get_comment_navigation(); ?>
 
     <ol class="comment-list">
       <?php
@@ -64,7 +64,7 @@ endif;
       ?>
     </ol>
 
-    <?php soundlush_get_comment_navigation(); ?>
+    <?php wpsl_get_comment_navigation(); ?>
 
     <?php
       if( !comments_open() && get_comments_number() ):

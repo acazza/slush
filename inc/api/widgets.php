@@ -59,7 +59,7 @@ class SlushPopularPostsWidget extends WP_Widget
 
         parent::__construct(
             'wpsl-popular-posts-widget',         //widget id
-            __( 'Slush Popular Posts', slush ),  //widget title
+            __( 'Slush Popular Posts', 'slush' ),  //widget title
             $widget_ops                          //options (class, description)
         );
     }
@@ -195,12 +195,12 @@ class SlushSocialWidget extends WP_Widget
     {
         $widget_ops = array(
           'classname' => 'wpsl-social-media',
-          'description' => __( 'Custom Slush Social Media Widget', slush ),
+          'description' => __( 'Custom Slush Social Media Widget', 'slush' ),
         );
 
         parent::__construct(
             'wpsl-social-media-widget',
-            __( 'Slush Social Media', slush ),
+            __( 'Slush Social Media', 'slush' ),
             $widget_ops
         );
     }
